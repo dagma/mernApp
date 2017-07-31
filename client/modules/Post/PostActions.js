@@ -60,7 +60,7 @@ export function deletePost(cuid) {
 export function thumbUpPost(cuid, post) {
   return {
     type: THUMB_UP_COMMENT,
-    id: commentId
+    id: cuid
   };
 }
 
@@ -75,7 +75,7 @@ export function thumbUpPostRequest(cuid, post) {
 export function thumbDownPost(cuid, post) {
   return {
     type: THUMB_DOWN_COMMENT,
-    id: commentId
+    id: cuid
   };
 }
 
