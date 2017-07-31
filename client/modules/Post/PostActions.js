@@ -4,6 +4,9 @@ import callApi from '../../util/apiCaller';
 export const ADD_POST = 'ADD_POST';
 export const ADD_POSTS = 'ADD_POSTS';
 export const DELETE_POST = 'DELETE_POST';
+export const EDIT_POST = 'EDIT_POST';
+export const THUMB_UP_COMMENT = 'THUMB_UP_COMMENT';
+export const THUMB_DOWN_COMMENT = 'THUMB_DOWN_COMMENT';
 
 // Export Actions
 export function addPost(post) {
@@ -20,6 +23,7 @@ export function addPostRequest(post) {
         name: post.name,
         title: post.title,
         content: post.content,
+        voteCount: 0,
       },
     }).then(res => dispatch(addPost(res.post)));
   };
@@ -52,6 +56,56 @@ export function deletePost(cuid) {
     cuid,
   };
 }
+
+export function thumbUpPost(cuid, post) {
+  return {
+    type: THUMB_UP_COMMENT,
+    id: commentId
+  };
+}
+
+export function thumbUpPostRequest(cuid, post) {
+  return (dispatch) => {
+    return callApi(`posts/${cuid}`, 'put', {
+
+    }).then((res) => dispatch(thumbUpPost(cuid, post)));
+  };
+}
+
+export function thumbDownPost(cuid, post) {
+  return {
+    type: THUMB_DOWN_COMMENT,
+    id: commentId
+  };
+}
+
+export function thumbDownPostRequest(cuid, post) {
+  return (dispatch) => {
+    return callApi(`posts/${cuid}`, 'put', {
+
+    }).then((res) => dispatch(thumbUpPost(cuid, post)));
+  };
+}
+
+export function editPost(cuid, post) {
+  return {
+    type: EDIT_POST,
+    cuid,
+    post
+  };
+};
+
+export function editPostRequest(cuid, post) {
+  return (dispatch) => {
+    return callApi(`posts/${cuid}`, 'put', {
+      post: {
+        name: post.name,
+        title: post.title,
+        content: post.content,
+      },
+    }).then(res => dispatch(editPost(cuid,post)));
+  };
+};
 
 export function deletePostRequest(cuid) {
   return (dispatch) => {

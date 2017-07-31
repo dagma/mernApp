@@ -2,7 +2,10 @@ export default {
   locale: 'en',
   messages: {
     siteTitle: 'MERN Starter Blog',
+    thumbUp: 'Thumb up',
+    thumbDown: 'Thumb down',
     addPost: 'Add Post',
+    editPost: 'Edit Post',
     switchLanguage: 'Switch Language',
     twitterMessage: 'We are on Twitter',
     by: 'By',
