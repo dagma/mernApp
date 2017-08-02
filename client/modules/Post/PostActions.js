@@ -75,7 +75,7 @@ export function thumbUpPostRequest(post) {
         content: post.content,
         voteCount: post.voteCount,
       },
-    }).then((res) => dispatch(thumbDownPost(post.cuid)));
+    }).then((res) => dispatch(thumbUpPost(post.cuid)));
   };
 }
 

@@ -81,7 +81,6 @@ export function deletePost(req, res) {
 }
 
 export function editPost(req, res) {
-  console.log('************ editPost ********* \n'); console.log(req.params); console.log('\n');console.log(req.body.post);
   Post.update({ cuid: req.params.cuid }, req.body.post).exec((err, post) => {
     if (err) {
       res.status(500).send(err);
