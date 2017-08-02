@@ -36,9 +36,9 @@ class PostListPage extends Component {
     }
   };
 
-  handleAddPost = (name, title, content, voteCount) => {
+  handleAddPost = (name, title, content) => {
     this.props.dispatch(toggleAddPost());
-    this.props.dispatch(addPostRequest({ name, title, content, voteCount }));
+    this.props.dispatch(addPostRequest({ name, title, content }));
   };
 
   render() {

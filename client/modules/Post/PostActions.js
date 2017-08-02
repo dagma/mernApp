@@ -25,9 +25,6 @@ export function addPostRequest(post) {
         content: post.content,
       },
     }).then(res => {
-        console.log('addPostRequest res:');
-        console.log(res);
-        console.log(res.post);
         dispatch(addPost(res.post));
       });
   };
@@ -61,29 +58,24 @@ export function deletePost(cuid) {
   };
 }
 
-export function thumbUpPost(cuid) {//console.log("thumbUpPost, cuid: "+ cuid);
+export function thumbUpPost(cuid) {
   return {
     type: THUMB_UP_COMMENT,
     cuid: cuid
   };
 }
 
-export function thumbUpPostRequest(post) { //console.log('thumbUpPostRequest, post: '); console.log(post.voteCount);
+export function thumbUpPostRequest(post) {
+  post.voteCount++;
   return (dispatch) => {
     return callApi(`posts/${post.cuid}`, 'put', {
       post: {
-       // name: post.name,
-        //title: post.title,
-       // content: post.content,
+        name: post.name,
+        title: post.title,
+        content: post.content,
         voteCount: post.voteCount,
       },
-    }).then((res) => {
-        //console.log('thumbUpPostRequest res: ');
-        //console.log(res);
-        //console.log(res.post);
-      dispatch(thumbUpPost(post.cuid));
-
-    });
+    }).then((res) => dispatch(thumbDownPost(post.cuid)));
   };
 }
 
@@ -95,9 +87,13 @@ export function thumbDownPost(cuid) {
 }
 
 export function thumbDownPostRequest(post) {
+  post.voteCount--;
   return (dispatch) => {
     return callApi(`posts/${post.cuid}`, 'put', {
       post: {
+        name: post.name,
+        title: post.title,
+        content: post.content,
         voteCount: post.voteCount,
       },
     }).then((res) => dispatch(thumbDownPost(post.cuid)));
