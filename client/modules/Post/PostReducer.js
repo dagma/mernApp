@@ -4,6 +4,10 @@ import { ADD_POST, ADD_POSTS, DELETE_POST, EDIT_POST, THUMB_UP_COMMENT, THUMB_DO
 const initialState = { data: [] };
 
 const PostReducer = (state = initialState, action) => {
+  console.log('PostReducer action: \n');
+  console.log(action);
+  console.log('state.data: \n');
+  console.log(state.data);
   switch (action.type) {
     case ADD_POST :
       return {
@@ -27,12 +31,26 @@ const PostReducer = (state = initialState, action) => {
 
     case THUMB_UP_COMMENT :
       return {
-        data: state.data.map(post => post.cuid === action.cuid ? post.voteCount + 1 : post),
-      };
+        data: state.data.map(post => {
+            console.log('THUMB_UP_COMMENT BEFORE post:'); console.log(post);
+            console.log('\npost.cuid: ' + post.cuid);
+            console.log('\naction.cuid: ' + action.cuid);
+            if (post.cuid === action.cuid) {
+              post.voteCount++; console.log('\n\nTHUMB_UP_COMMENT AFTER post:'); console.log(post);
+            } else {
+              post;
+            }
+          }),
+      }; 
+/*
+    case THUMB_UP_COMMENT :
+      return {
+        data: state.data.map(post => post.cuid === action.cuid ? post.voteCount++ : post),
+      };*/
 
     case THUMB_DOWN_COMMENT :
       return {
-        data: state.data.map(post => post.cuid === action.cuid ? post.voteCount - 1 : post),
+        data: state.data.map(post => post.cuid === action.cuid ? post.voteCount-- : post),
       };
 
     default:

@@ -23,9 +23,13 @@ export function addPostRequest(post) {
         name: post.name,
         title: post.title,
         content: post.content,
-        voteCount: 0,
       },
-    }).then(res => dispatch(addPost(res.post)));
+    }).then(res => {
+        console.log('addPostRequest res:');
+        console.log(res);
+        console.log(res.post);
+        dispatch(addPost(res.post));
+      });
   };
 }
 
@@ -57,33 +61,46 @@ export function deletePost(cuid) {
   };
 }
 
-export function thumbUpPost(cuid, post) {
+export function thumbUpPost(cuid) {//console.log("thumbUpPost, cuid: "+ cuid);
   return {
     type: THUMB_UP_COMMENT,
-    id: cuid
+    cuid: cuid
   };
 }
 
-export function thumbUpPostRequest(cuid, post) {
+export function thumbUpPostRequest(post) { //console.log('thumbUpPostRequest, post: '); console.log(post.voteCount);
   return (dispatch) => {
-    return callApi(`posts/${cuid}`, 'put', {
+    return callApi(`posts/${post.cuid}`, 'put', {
+      post: {
+       // name: post.name,
+        //title: post.title,
+       // content: post.content,
+        voteCount: post.voteCount,
+      },
+    }).then((res) => {
+        //console.log('thumbUpPostRequest res: ');
+        //console.log(res);
+        //console.log(res.post);
+      dispatch(thumbUpPost(post.cuid));
 
-    }).then((res) => dispatch(thumbUpPost(cuid, post)));
+    });
   };
 }
 
-export function thumbDownPost(cuid, post) {
+export function thumbDownPost(cuid) {
   return {
     type: THUMB_DOWN_COMMENT,
-    id: cuid
+    cuid: cuid
   };
 }
 
-export function thumbDownPostRequest(cuid, post) {
+export function thumbDownPostRequest(post) {
   return (dispatch) => {
-    return callApi(`posts/${cuid}`, 'put', {
-
-    }).then((res) => dispatch(thumbUpPost(cuid, post)));
+    return callApi(`posts/${post.cuid}`, 'put', {
+      post: {
+        voteCount: post.voteCount,
+      },
+    }).then((res) => dispatch(thumbDownPost(post.cuid)));
   };
 }
 
@@ -101,7 +118,7 @@ export function editPostRequest(cuid, post) {
       post: {
         name: post.name,
         title: post.title,
-        content: post.content,
+        content: post.content
       },
     }).then(res => dispatch(editPost(cuid,post)));
   };

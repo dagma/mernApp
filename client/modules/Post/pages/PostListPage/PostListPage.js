@@ -25,7 +25,7 @@ class PostListPage extends Component {
   };
 
   handleThumbUpComment = post => {
-    if (confirm('Do you want to thumbUp?')) {console.log(post);
+    if (confirm('Do you want to thumbUp?')) {
       this.props.dispatch(thumbUpPostRequest(post));
     }
   };
@@ -36,9 +36,9 @@ class PostListPage extends Component {
     }
   };
 
-  handleAddPost = (name, title, content) => {
+  handleAddPost = (name, title, content, voteCount) => {
     this.props.dispatch(toggleAddPost());
-    this.props.dispatch(addPostRequest({ name, title, content }));
+    this.props.dispatch(addPostRequest({ name, title, content, voteCount }));
   };
 
   render() {
@@ -72,6 +72,7 @@ PostListPage.propTypes = {
     name: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
+    //voteCount: PropTypes.number.isRequired,
   })).isRequired,
   showAddPost: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,

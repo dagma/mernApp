@@ -38,6 +38,7 @@ export function addPost(req, res) {
 
   newPost.slug = slug(newPost.title.toLowerCase(), { lowercase: true });
   newPost.cuid = cuid();
+  newPost.voteCount = 0;
   newPost.save((err, saved) => {
     if (err) {
       res.status(500).send(err);
@@ -80,6 +81,7 @@ export function deletePost(req, res) {
 }
 
 export function editPost(req, res) {
+  //console.log('************ editPost ********* \n'); console.log(req.params); console.log('\n');console.log(req.body.post);
   Post.update({ cuid: req.params.cuid }, req.body.post).exec((err, post) => {
     if (err) {
       res.status(500).send(err);
