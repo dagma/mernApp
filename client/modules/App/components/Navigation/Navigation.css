@@ -1,0 +1,14 @@
+.navigation ul {
+  list-style: none;
+  width: 980px;
+  margin: auto;
+  text-align: right;
+}
+
+.navigation li {
+  display: inline-block;
+  margin: 10px;
+  padding: 5px;
+  cursor: pointer;
+  color: #fff;
+}

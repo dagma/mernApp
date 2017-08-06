@@ -1,6 +1,9 @@
 export default {
   locale: 'fr',
   messages: {
+    about: 'Sur',
+    posts: 'Des postes',
+    home: 'Maison',
     siteTitle: 'MERN blog de démarrage',
     thumbUp: 'Thumb up',
     thumbDown: 'Thumb down',

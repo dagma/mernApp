@@ -1,9 +1,8 @@
 .header {
-  background: #eee url('../../header-bk.png') center;
+  background: #8bd4da;
   background-size: cover;
   border-bottom: 1px solid #ccc;
 }
-
 .content {
   width: 100%;
   max-width: 980px;
@@ -33,7 +32,7 @@
   float: right;
 }
 
-.language-switcher {
+.header-container {
   background: rgba(0, 0, 0, 0.1);
 }
 
