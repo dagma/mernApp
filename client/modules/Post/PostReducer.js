@@ -27,23 +27,26 @@ const PostReducer = (state = initialState, action) => {
 
     case THUMB_UP_COMMENT :
       return {
+        data: state.data.map(function(post) {
+          return post;
+          }),
+      };
+
+/*
+    case THUMB_DOWN_COMMENT :
+      return {
+        data: state.data.map(post => post.cuid === action.cuid ? post.voteCount-- : post),
+      };
+*/
+      case THUMB_DOWN_COMMENT :
+      return {
         data: state.data.map(post => {
             if (post.cuid === action.cuid) {
-              post.voteCount++;
+              post.voteCount--;
             } else {
               post;
             }
           }),
-      }; 
-/*
-    case THUMB_UP_COMMENT :
-      return {
-        data: state.data.map(post => post.cuid === action.cuid ? post.voteCount++ : post),
-      };*/
-
-    case THUMB_DOWN_COMMENT :
-      return {
-        data: state.data.map(post => post.cuid === action.cuid ? post.voteCount-- : post),
       };
 
     default:
