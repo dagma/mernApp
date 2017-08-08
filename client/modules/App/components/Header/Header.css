@@ -3,6 +3,11 @@
   background-size: cover;
   border-bottom: 1px solid #ccc;
 }
+.header-box {
+  width: 100%;
+  max-width: 980px;
+  margin: auto;
+}
 .content {
   width: 100%;
   max-width: 980px;
@@ -38,8 +43,6 @@
 
 .language-switcher ul {
   list-style: none;
-  width: 980px;
-  margin: auto;
   text-align: right;
 }
 
